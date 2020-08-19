@@ -4,7 +4,7 @@
       <button id="main-menu-start" class="btn" v-on:click="startGame">Start Game</button>
       <button id="menu-menu-computer" class="btn" v-on:click="startGameComputer">
         <div>Start Game</div>
-        <div>Against Computer</div>
+        <div id="against-computer">Against Computer</div>
         </button>
       <button id="main-menu-scores" class="btn" v-on:click="highScores">High Scores</button>
       <button id="main-menu-tutorial" class="btn" v-on:click="tutorial">Tutorial</button>
@@ -54,16 +54,25 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  #menu-menu-computer {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -65%);
+  }
   #main-menu-scores {
     position: absolute;
-    top: 66%;
+    top: 80%;
     left: 50%;
-    transform: translate(-50%, -66%);
+    transform: translate(-50%, -80%);
   }
-    #main-menu-tutorial {
+  #main-menu-tutorial {
     position: absolute;
-    top: 82%;
+    top: 92%;
     left: 50%;
-    transform: translate(-50%, -82%);
+    transform: translate(-50%, -92%);
+  }
+  #against-computer {
+    font-size: small;
   }
 </style>
