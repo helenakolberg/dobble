@@ -15,11 +15,12 @@
 </template>
 
 <script>
-import CardService from '../services/CardService.js'
-import Timer from './Timer.vue'
-import Card from './Card.vue'
-import ComputerOpponent from './ComputerOpponent.vue'
-import { eventBus } from '@/main.js'
+import CardService from '../services/CardService.js';
+import Timer from './Timer.vue';
+import Card from './Card.vue';
+import { eventBus } from '@/main.js';
+import { shuffle } from '../helpers/ShuffleArray.js';
+import { resetBoard } from '../helpers/ResetBoard.js';
 
 export default {
     name: 'game-board',
@@ -36,17 +37,18 @@ export default {
     },
 
     mounted() {
-        // retrieves cards from database, then deals two cards
+        // retrieves cards from database, 
+        // shuffles cards' symbols, 
+        // then deals two cards
         CardService.getCards()
             .then(cards => this.cards = cards)
-            .then(() => this.dealLeftCard())
-            .then(() => this.dealRightCard());
+            .then(() => this.dealCards());
 
         // from Card: pushes symbol into selectedSymbols array, then checks if guess is correct
         // if guess is correct calls winRound, else if there are two selectedSymbols calls incorrectGuess 
         eventBus.$on('symbol-selected', (cardSymbol) => { 
             this.selectedSymbols.push(cardSymbol);
-            if (this.checkWin()) {
+            if (this.symbolsSame) {
                 this.winRound();
             } else if (this.twoSymbols && !this.symbolsSame) {
                 this.incorrectGuess();
@@ -79,18 +81,12 @@ export default {
         })
 
         // clean values when game ends
-        eventBus.$on("game-over", () => {
-            this.cards = [];
-            this.dealtLeftCard = null;
-            this.dealtRightCard = null;
-            this.selectedSymbols = [];
+        eventBus.$on("game-over", function(cards, dealtLeftCard, dealtRightCard, selectedSymbols) {
+            resetBoard();
         });
 
-        eventBus.$on("main-menu", () => {
-            this.cards = [];
-            this.dealtLeftCard = null;
-            this.dealtRightCard = null;
-            this.selectedSymbols = [];
+        eventBus.$on("main-menu", function(cards, dealtLeftCard, dealtRightCard, selectedSymbols) {
+            resetBoard();
         });
 
     },
@@ -113,11 +109,6 @@ export default {
     },
 
     methods: {
-
-        // TODO REEMOVE
-        checkWin() {
-            return this.twoSymbols && this.symbolsSame;
-        },
 
         mainMenu () {
             eventBus.$emit("main-menu");  // to App
@@ -156,8 +147,15 @@ export default {
             eventBus.$emit('guess-over');
             this.score += 1;
             this.selectedSymbols = [];
+            this.dealCards();
+        },
+
+        // deals cards and then shuffles symbols
+        dealCards() {
             this.dealLeftCard();
             this.dealRightCard();
+            shuffle(this.dealtLeftCard.symbols);
+            shuffle(this.dealtRightCard.symbols);
         }
 
     },
