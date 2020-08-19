@@ -47,10 +47,13 @@ export default {
   },
 
   methods: {
+
+    // to App
     highScores () {
       eventBus.$emit('high-scores');
     },
-    //to App
+
+    // to App
     mainMenu () {
       eventBus.$emit('main-menu');  
     },

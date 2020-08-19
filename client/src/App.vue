@@ -66,6 +66,7 @@ export default {
     // from Tutorial, ScoreList, GameBoard, GameOver
     eventBus.$on("main-menu", () => {
       this.pageDisplay = "main-menu";
+      this.opponent = false;
     });
   }
 
