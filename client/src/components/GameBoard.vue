@@ -46,7 +46,7 @@ export default {
         // if guess is correct calls winRound, else if there are two selectedSymbols calls incorrectGuess 
         eventBus.$on('symbol-selected', (cardSymbol) => { 
             this.selectedSymbols.push(cardSymbol);
-            if (this.checkWin()) {
+            if (this.symbolsSame) {
                 this.winRound();
             } else if (this.twoSymbols && !this.symbolsSame) {
                 this.incorrectGuess();
@@ -92,11 +92,6 @@ export default {
     },
 
     methods: {
-
-        // TODO REEMOVE
-        checkWin() {
-            return this.twoSymbols && this.symbolsSame;
-        },
 
         mainMenu () {
             eventBus.$emit("main-menu");  // to App
