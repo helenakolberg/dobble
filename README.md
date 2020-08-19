@@ -19,11 +19,14 @@ npm i
 npm run seeds
 ```
 ```
-npm run server:dev
+npm start
 ```
 
 ##### Commands to run in ```client```:
 
+```
+npm i
+```
 ```
 npm run serve
 ```
