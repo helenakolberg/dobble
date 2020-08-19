@@ -14,11 +14,12 @@
 </template>
 
 <script>
-import CardService from '../services/CardService.js'
-import Timer from './Timer.vue'
-import Card from './Card.vue'
-import { eventBus } from '@/main.js'
-import { shuffle } from "../helpers/ShuffleArray";
+import CardService from '../services/CardService.js';
+import Timer from './Timer.vue';
+import Card from './Card.vue';
+import { eventBus } from '@/main.js';
+import { shuffle } from '../helpers/ShuffleArray.js';
+import { resetBoard } from '../helpers/ResetBoard.js';
 
 export default {
     name: 'game-board',
@@ -64,18 +65,12 @@ export default {
         })
 
         // clean values when game ends
-        eventBus.$on("game-over", () => {
-            this.cards = [];
-            this.dealtLeftCard = null;
-            this.dealtRightCard = null;
-            this.selectedSymbols = [];
+        eventBus.$on("game-over", function(cards, dealtLeftCard, dealtRightCard, selectedSymbols) {
+            resetBoard();
         });
 
-        eventBus.$on("main-menu", () => {
-            this.cards = [];
-            this.dealtLeftCard = null;
-            this.dealtRightCard = null;
-            this.selectedSymbols = [];
+        eventBus.$on("main-menu", function(cards, dealtLeftCard, dealtRightCard, selectedSymbols) {
+            resetBoard();
         });
 
     },
