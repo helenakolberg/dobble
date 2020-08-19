@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main-menu v-if="pageDisplay === 'main-menu'" />
-    <game-board v-if="pageDisplay === 'game-board'"/>
+    <game-board v-if="pageDisplay === 'game-board'" :opponent="opponent" />
     <game-over v-if="pageDisplay === 'game-over'" :score="finalScore" />
     <score-list v-if="pageDisplay === 'score-list'" />
     <tutorial v-if="pageDisplay === 'tutorial'"/>
@@ -20,7 +20,8 @@ export default {
   data () {
     return {
       finalScore: 0,
-      pageDisplay: "main-menu"
+      pageDisplay: "main-menu",
+      opponent: false
     }
   },
 
@@ -46,9 +47,10 @@ export default {
       this.pageDisplay = "game-board";
     });
 
+    // from MainMenu
     eventBus.$on("start-game-computer", () => {
       this.pageDisplay = "game-board";
-      eventBus.$emit("enable-computer-opponent");
+      this.opponent = true;
     })
 
     // from MainMenu, GameOver

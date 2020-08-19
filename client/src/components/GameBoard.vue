@@ -21,9 +21,11 @@ import Card from './Card.vue';
 import { eventBus } from '@/main.js';
 import { shuffle } from '../helpers/ShuffleArray.js';
 import { resetBoard } from '../helpers/ResetBoard.js';
+import ComputerOpponent from './ComputerOpponent.vue';
 
 export default {
     name: 'game-board',
+    props: ['opponent'],
 
     data() {
         return {
@@ -31,8 +33,7 @@ export default {
             dealtLeftCard: null,
             dealtRightCard: null,
             selectedSymbols: [],
-            score: 0,
-            opponent: false
+            score: 0
         }
     },
 

@@ -23,6 +23,7 @@ export default {
         // calls the computerWins function at a time specified by timeOut (defined in createRandomTimeOut)
         let activeTimeout = setTimeout(this.computerWins, this.timeOut);
 
+        // from GameBoard
         // sets matchingSymbol back to null, clears the previous Timeout, creates a new random value for timeOut variable,
         // resets the value of activeTimeout
         eventBus.$on("new-round", () => {
