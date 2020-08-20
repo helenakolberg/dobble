@@ -79,7 +79,7 @@ export default {
             setTimeout(this.startNewComputerOpponentRound, 1000);
         })
 
-        // clean values when game ends
+        // cleans values when game ends
         eventBus.$on("game-over", function(cards, dealtLeftCard, dealtRightCard, selectedSymbols) {
             resetBoard();
         });

@@ -52,7 +52,7 @@ export default {
         // to Gameboard
         computerWins() {
             this.findMatchingSymbol();
-            eventBus.$emit("computer-wins");
+            eventBus.$emit("computer-wins", this.matchingSymbol);
         }
     }
 }
