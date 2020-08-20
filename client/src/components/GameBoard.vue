@@ -67,11 +67,6 @@ export default {
             eventBus.$emit("game-over", this.score)
         });
 
-        eventBus.$on('enable-computer-opponent', () => {
-            console.log('enable computer opponent event received')
-            this.opponent = true;
-        });
-
         // from ComputerOpponent: empties selectedSymbols array, deals new cards, sends eventBus back to ComputerOpponent
         eventBus.$on("computer-wins", () => {
             eventBus.$emit('guess-over');
@@ -141,11 +136,13 @@ export default {
         // then empties selectedSymbols array
         // then deals two new cards
         // sends eventBus to Card (card then deselects symbol)
+        // sends eventBus to ComputerOpponent which resets matchingSymbol and calls new setTimeout
         winRound() {
             eventBus.$emit('guess-over');
             this.score += 1;
             this.selectedSymbols = [];
             this.dealCards();
+            eventBus.$emit('new-round');
         },
 
         // deals cards and then shuffles symbols

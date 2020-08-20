@@ -6,7 +6,7 @@
                  v-on:click.native="handleClick(oneSymbol)" 
                  :cardSymbol="oneSymbol" 
                  :key="index"
-                 v-bind:class= "selectedSymbol === oneSymbol ? 'selected symbol' : 'symbol' "/>
+                 v-bind:class= "(selectedSymbol === oneSymbol) ? 'selected symbol' : (computerSymbol === oneSymbol) ? 'computer symbol' : 'symbol' "/>
   </div>
 </template>
 
@@ -77,5 +77,8 @@
   }
   .selected {
     border: 1px red solid;
+  }
+  .computer {
+    border: 1px rgb(22, 1, 209) solid;
   }
 </style>

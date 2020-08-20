@@ -35,6 +35,10 @@ export default {
 
     },
 
+    beforeDestroy() {
+        eventBus.$off('new-round');
+    },
+
     methods: {
 
         // finds the matching symbol between leftCard and rightCard, then assigns it to matchingSymbol
