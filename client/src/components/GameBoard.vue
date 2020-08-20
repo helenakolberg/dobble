@@ -4,7 +4,8 @@
         <timer />
         <div id="score-display">Score: <span class="score-span">{{score}}</span></div>
         <button id="btn-game-board" class="btn" v-on:click="mainMenu">Main menu</button>
-      </div>
+      </div>  
+      <div v-if="opponent" id="opponent-score-display">Opponent's Score: <span class="score-span">{{opponentScore}}</span></div>
       <img class="logo" src="../assets/dobble.png" alt="dobble-logo"/>
       <div class="card-div">
         <card :card="dealtLeftCard" class="card"/>
@@ -33,7 +34,8 @@ export default {
             dealtLeftCard: null,
             dealtRightCard: null,
             selectedSymbols: [],
-            score: 0
+            score: 0,
+            opponentScore: 0
         }
     },
 
@@ -71,6 +73,7 @@ export default {
         eventBus.$on("computer-wins", () => {
             eventBus.$emit('guess-over');
             this.selectedSymbols = [];
+            this.opponentScore += 1;
             setTimeout(this.startNewComputerOpponentRound, 1000);
         })
 
@@ -181,7 +184,7 @@ export default {
     }
     .logo {
         position: absolute;
-        top: 22%;
+        top: 27%;
         left: 50%;
         transform: translate(-50%, -22%);
         width: 80px;
@@ -219,6 +222,10 @@ export default {
         max-width: 420px;
 
     }
+    #opponent-score-display {
+        margin-left: 37%;
+        padding: 0;
+    }
     
     @media screen and (min-width: 1000px) {
         .card {
@@ -226,6 +233,9 @@ export default {
             height: 250px;
         }
         #score-display, .score-span {
+            font-size: 30px;
+        }
+        #opponent-score-display {
             font-size: 30px;
         }
         #timer, .time-limit-span {
