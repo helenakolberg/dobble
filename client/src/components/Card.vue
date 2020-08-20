@@ -76,9 +76,9 @@
     overflow: hidden;
   }
   .selected {
-    border: 1px red solid;
+    border: 2px red solid;
   }
   .computer {
-    border: 1px rgb(22, 1, 209) solid;
+    border: 2px #1601d1 solid;
   }
 </style>
