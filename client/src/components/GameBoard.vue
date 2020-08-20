@@ -76,9 +76,7 @@ export default {
         eventBus.$on("computer-wins", () => {
             eventBus.$emit('guess-over');
             this.selectedSymbols = [];
-            this.dealLeftCard();
-            this.dealRightCard();
-            eventBus.$emit("new-round");
+            setTimeout(this.startNewComputerOpponentRound, 1000);
         })
 
         // clean values when game ends
@@ -143,7 +141,6 @@ export default {
         // then empties selectedSymbols array
         // then deals two new cards
         // sends eventBus to Card (card then deselects symbol)
-        // finally eventBus to ComputerOpponent (to reset the timeout)
         winRound() {
             eventBus.$emit('guess-over');
             this.score += 1;
@@ -157,6 +154,12 @@ export default {
             this.dealRightCard();
             shuffle(this.dealtLeftCard.symbols);
             shuffle(this.dealtRightCard.symbols);
+        },
+
+        // deals cards and sents eventBus to ComputerOpponent (which then clears matchingSymbol and calls new setTimeout)
+        startNewComputerOpponentRound() {
+            this.dealCards();
+            eventBus.$emit('new-round');
         }
 
     },
