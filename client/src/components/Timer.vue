@@ -10,7 +10,7 @@ import { eventBus } from "@/main.js";
 export default {
   data () {
     return {
-      timeLimit: 30,  // round time limit in seconds
+      timeLimit: 60,  // round time limit in seconds
       timeRemaining: null  // time remaining on this round
     };
   },

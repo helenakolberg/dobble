@@ -76,9 +76,13 @@
     overflow: hidden;
   }
   .selected {
-    border: 2px red solid;
+    padding: 3px;
+    border: 3px red solid;
+    border-radius: 20px;
   }
   .computer {
-    border: 2px #1601d1 solid;
+    padding: 3px;
+    border: 3px #1601d1 solid;
+    border-radius: 20px;
   }
 </style>
