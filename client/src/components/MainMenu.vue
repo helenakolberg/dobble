@@ -62,9 +62,9 @@ export default {
   }
   #main-menu-scores {
     position: absolute;
-    top: 80%;
+    top: 79%;
     left: 50%;
-    transform: translate(-50%, -80%);
+    transform: translate(-50%, -79%);
   }
   #main-menu-tutorial {
     position: absolute;

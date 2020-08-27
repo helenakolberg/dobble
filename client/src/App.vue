@@ -2,7 +2,7 @@
   <div id="app">
     <main-menu v-if="pageDisplay === 'main-menu'" />
     <game-board v-if="pageDisplay === 'game-board'" :opponent="opponent" />
-    <game-over v-if="pageDisplay === 'game-over'" :score="finalScore" />
+    <game-over v-if="pageDisplay === 'game-over'" :score="finalScore" :opponent="opponent" :opponentScore="finalOpponentScore" />
     <score-list v-if="pageDisplay === 'score-list'" />
     <tutorial v-if="pageDisplay === 'tutorial'"/>
   </div>
@@ -20,6 +20,7 @@ export default {
   data () {
     return {
       finalScore: 0,
+      finalOpponentScore: 0,
       pageDisplay: "main-menu",
       opponent: false
     }
@@ -35,9 +36,10 @@ export default {
 
   mounted () {
     // from GameBoard when timer expires
-    eventBus.$on("game-over", score => {
+    eventBus.$on("game-over", (score, opponentScore) => {
       console.log("Game over: time expired")
       this.finalScore = score;
+      this.finalOpponentScore = opponentScore;
       this.pageDisplay = "game-over";
     });
 
@@ -102,7 +104,7 @@ export default {
     background-color: #EBEC83;
   }
   .time-limit-span {
-    color: rgb(180, 14, 14);
+    color: #b40e0e;
   }
   .score-span,
   .text-highlight {

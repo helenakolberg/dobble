@@ -66,7 +66,7 @@ export default {
 
         // from Timer: sends new game-over event bus (containing score) to App
         eventBus.$on("time-up", () => {
-            eventBus.$emit("game-over", this.score)
+            eventBus.$emit("game-over", this.score, this.opponentScore)
         });
 
         // from ComputerOpponent: empties selectedSymbols array, deals new cards, sends eventBus back to ComputerOpponent

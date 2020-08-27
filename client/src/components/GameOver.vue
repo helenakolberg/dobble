@@ -4,10 +4,14 @@
     <div id="game-over-container">
       <div id="game-over-heading">
         <h1>Game Over</h1>
+        <h2 v-if="opponent && score > opponentScore" class="game-result">You Win!</h2>
+        <h2 v-if="opponent && score < opponentScore" class="game-result">You Lose</h2>
+        <h2 v-if="opponent && score === opponentScore" class="game-result">It's a Draw!</h2>
       </div>
     
       <div id="game-over-score">
         <p>You scored: <span class="score-span">{{score}}</span></p>
+        <p v-if="opponent">Opponent scored: <span class="score-span">{{opponentScore}}</span></p>
       </div>
 
     <form v-on:submit="submitScore" v-if="!scoreSubmitted">
@@ -39,11 +43,13 @@ export default {
     }
   },
   
-  props: {
+  props: { 
+    opponent: Boolean,
     score: {
       type: Number,
       required: true
-    }
+    },
+    opponentScore: Number
   },
 
   methods: {
@@ -117,6 +123,9 @@ export default {
   }
   #game-over-btn-div > button {
     width: 100%;
+  }
+  .game-result {
+    color: #E4E660
   }
 
   @media screen and (min-width: 1000px){
